@@ -10,6 +10,7 @@ function App() {
 
   const location = useLocation();
 
+  // позволяет изъять элемент из DOM
   const trans = useTransition(location, (location) => location.pathname, {
     from: {
       opacity: 0,
@@ -29,11 +30,13 @@ function App() {
     <>
       <Header />
       <main className="container" style={{ position: 'relative', overflow: 'hidden', minHeight: '90vh' }}>
+        <Switch>
+          <Route exact path='/' component={HomePage} />
+        </Switch>
         {trans.map(({ item, props, key }) => (
           <animated.div key={key} style={props}>
             <div style={{ position: 'absolute', width: '100%' }}>
               <Switch location={item}>
-                <Route exact path='/' component={HomePage} />
                 <Route exact path='/about' component={About} />
                 <Route exact path='/contacts' component={Contacts} />
               </Switch>
